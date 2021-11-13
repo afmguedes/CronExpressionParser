@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CronExpressionParser.Core\CronExpressionParser.Core.csproj" />
+  </ItemGroup>
+
 </Project>
