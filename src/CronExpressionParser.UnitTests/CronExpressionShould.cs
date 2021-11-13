@@ -1,4 +1,6 @@
+using System;
 using CronExpressionParser.Core;
+using CronExpressionParser.Core.Exceptions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -9,8 +11,8 @@ namespace CronExpressionParser.UnitTests
 		[Test]
 		public void ReturnExpectedOutputModel_WhenExpand()
 		{
-			string input = "*/15 0 1,15 * 1-5 /usr/bin/find";
-			
+			const string input = "*/15 0 1,15 * 1-5 /usr/bin/find";
+
 			var expectedMinutes = new[] { 0, 15, 30, 45 };
 			var expectedHours = new[] { 0 };
 			var expectedDaysOfMonth = new[] { 1, 15 };
@@ -22,6 +24,15 @@ namespace CronExpressionParser.UnitTests
 			var actualOutputModel = CronExpression.Create(input).Expand();
 
 			actualOutputModel.Should().BeEquivalentTo(expectedOutputModel);
+		}
+
+		[TestCase("", TestName = "WhenTooFewFieldsInInput")]
+		[TestCase("0 0 1 1 1 command 0", TestName = "WhenTooManyFieldsInInput")]
+		public void ThrowInvalidNumberOfFieldsException(string input)
+		{
+			Action action = () => CronExpression.Create(input).Expand();
+
+			action.Should().Throw<InvalidNumberOfFieldsException>().WithMessage(LogMessageFactory.InvalidNumberOfFieldsLogMessage);
 		}
 	}
 }
