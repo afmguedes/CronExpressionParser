@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CronExpressionParser.Core.Fields
 {
-	public class MonthsField
+	public class MonthsField : IField
 	{
 		public List<int> TryParse(string monthsExpression)
 		{

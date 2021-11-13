@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CronExpressionParser.Core.Fields
 {
-	public class MinutesField
+	public class MinutesField : IField
 	{
+
 		public List<int> TryParse(string minutesExpression)
 		{
-			throw new NotImplementedException();
+			return new List<int> { int.Parse(minutesExpression) };
 		}
 	}
 }
