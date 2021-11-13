@@ -8,36 +8,18 @@ namespace CronExpressionParser.UnitTests
 {
 	public class MinutesFieldShould
 	{
-		[Test]
-		public void ReturnSingleValue_WhenSingleValueExpression()
+		private static readonly TestCaseData[] TestCases =
 		{
-			const string minutesExpression = "1";
-			var expectedMinutes = new List<int> { 1 };
+			new TestCaseData("1", new List<int> { 1 }).SetName("SingleValueExpression"),
+			new TestCaseData("*", new List<int>(Enumerable.Range(0, 59))).SetName("SingleStarExpression"),
+			new TestCaseData("1, 2, 3", new List<int> { 1, 2, 3 }).SetName("AdditionalValuesExpression")
+		};
 
+		[TestCaseSource(nameof(TestCases))]
+		public void ReturnExpectedMinutes_WhenPassed(string minutesExpression, List<int> expectedMinutes)
+		{
 			var actualMinutes = new MinutesField().TryParse(minutesExpression);
 			
-			actualMinutes.Should().BeEquivalentTo(expectedMinutes);
-		}
-
-		[Test]
-		public void ReturnRangeOfValues_WhenSingleStarExpression()
-		{
-			const string minutesExpression = "*";
-			var expectedMinutes = new List<int>(Enumerable.Range(0, 59));
-
-			var actualMinutes = new MinutesField().TryParse(minutesExpression);
-
-			actualMinutes.Should().BeEquivalentTo(expectedMinutes);
-		}
-
-		[Test]
-		public void ReturnListOfValues_WhenAdditionalValuesExpression()
-		{
-			const string minutesExpression = "1, 2, 3";
-			var expectedMinutes = new List<int> { 1, 2, 3 };
-
-			var actualMinutes = new MinutesField().TryParse(minutesExpression);
-
 			actualMinutes.Should().BeEquivalentTo(expectedMinutes);
 		}
 	}
