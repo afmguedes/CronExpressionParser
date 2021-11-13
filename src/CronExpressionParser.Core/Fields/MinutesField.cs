@@ -27,12 +27,15 @@ namespace CronExpressionParser.Core.Fields
 
 			var valuesSplitBySlash = minutesExpression.Split('/');
 
-			if (valuesSplitBySlash.Length > 1)
+			if (valuesSplitBySlash.Length == 1)
 			{
-				return new List<int>(GetIncrementsOfStartingAt(int.Parse(valuesSplitBySlash[1]), 0));
+				return minutesExpression.Equals("*")
+					? new List<int>(Enumerable.Range(MINUTES_MINVALUE, MINUTES_MAXVALUE))
+					: new List<int> { int.Parse(minutesExpression) };
 			}
-
-			return minutesExpression.Equals("*") ? new List<int>(Enumerable.Range(MINUTES_MINVALUE, MINUTES_MAXVALUE)) : new List<int> { int.Parse(valuesSplitByComma.First()) };
+				
+			var start = valuesSplitBySlash.First().Replace('*', '0');
+			return new List<int>(GetIncrementsOfStartingAt(int.Parse(valuesSplitBySlash[1]), int.Parse(start)));
 		}
 
 		private static IEnumerable<int> GetIncrementsOfStartingAt(int increment, int start)
