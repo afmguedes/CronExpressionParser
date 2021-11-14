@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "CronExpressionParser.Core": {
+      "commandName": "Project"
+    }
+  }
+}

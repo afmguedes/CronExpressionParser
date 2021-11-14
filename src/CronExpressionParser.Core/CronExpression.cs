@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CronExpressionParser.Core.Config;
 using CronExpressionParser.Core.Exceptions;
 using CronExpressionParser.Core.Fields;
@@ -27,7 +26,7 @@ namespace CronExpressionParser.Core
 
 		public static CronExpression Create(string inputExpression)
 		{
-			var fields = inputExpression.Split(Constants.FieldSeparator);
+			var fields = inputExpression.Split(Constants.SpaceChar);
 
 			if (fields.Length != Constants.NumberOfFields)
 			{
@@ -41,9 +40,9 @@ namespace CronExpressionParser.Core
 				fields[Constants.CommandIndex]);
 		}
 
-		public OutputModel Expand()
+		public ViewModel Expand()
 		{
-			return new OutputModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
+			return new ViewModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
 		}
 
 		private static IList<List<int>> ParseNumericFields(IReadOnlyList<string> fields)

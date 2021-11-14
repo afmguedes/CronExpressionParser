@@ -2,7 +2,12 @@
 {
 	public class Constants
 	{
-		public const char FieldSeparator = ' ';
+		public const char SpaceChar = ' ';
+		public const char CommaChar = ',';
+		public const char StarChar = '*';
+		public const char RangeChar = '-';
+		public const char IncrementsChar = '/';
+
 		public const int NumberOfFields = 6;
 		public const int MinutesIndex = 0;
 		public const int HoursIndex = 1;
