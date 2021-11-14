@@ -13,7 +13,7 @@ namespace CronExpressionParser.UnitTests
 		private static readonly TestCaseData[] HappyPathTestCases =
 		{
 			new TestCaseData("1", new List<int> { 1 }).SetName("SingleValueExpression"),
-			new TestCaseData("*", new List<int>(Enumerable.Range(0, 59))).SetName("SingleStarExpression"),
+			new TestCaseData("*", new List<int>(Enumerable.Range(0, 60))).SetName("SingleStarExpression"),
 			new TestCaseData("1, 2, 3", new List<int> { 1, 2, 3 }).SetName("AdditionalValuesExpression"),
 			new TestCaseData("1-5", new List<int> { 1, 2, 3, 4, 5 }).SetName("RangeExpression"),
 			new TestCaseData("*/10", new List<int> { 0, 10, 20, 30, 40, 50 }).SetName("IncrementsFromStarExpression"),
