@@ -43,7 +43,7 @@ namespace CronExpressionParser.Core
 
 		public OutputModel Expand()
 		{
-			throw new NotImplementedException();
+			return new OutputModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
 		}
 
 		private static IList<List<int>> ParseNumericFields(IReadOnlyList<string> fields)
