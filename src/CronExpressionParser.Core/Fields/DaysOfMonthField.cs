@@ -53,7 +53,10 @@ namespace CronExpressionParser.Core.Fields
 			{
 				if (!int.TryParse(value, out var parsedValue) || parsedValue > DAYSOFMONTH_MAXVALUE)
 				{
-					throw new ArgumentException($"'{value}' is not a valid value for {nameof(DaysOfMonthField)}");
+					var exceptionMessage =
+						string.Format(LogMessageFactory.InvalidValueForExpressionFieldMessageTemplate, value,
+							nameof(DaysOfMonthField));
+					throw new ArgumentException(exceptionMessage);
 				}
 
 				parsedIntegers.Add(parsedValue);
