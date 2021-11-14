@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace CronExpressionParser.UnitTests
 {
+	[TestFixture]
 	public class MinutesFieldShould
 	{
 		private static readonly TestCaseData[] HappyPathTestCases =
@@ -36,6 +37,7 @@ namespace CronExpressionParser.UnitTests
 			new TestCaseData("0-+", "'+' is not a valid value for MinutesField").SetName("InvalidCharacterRangeValuesExpression"),
 			new TestCaseData("0/&", "'&' is not a valid value for MinutesField").SetName("InvalidCharacterIncrementValuesExpression"),
 			new TestCaseData("*/*", "'*' is not a valid value for MinutesField").SetName("InvalidCharactersIncrementValuesExpression"),
+			new TestCaseData("60", "'60' is not a valid value for MinutesField").SetName("OutOfRangeValueExpression")
 		};
 
 		[TestCaseSource(nameof(UnhappyPathTestCases))]

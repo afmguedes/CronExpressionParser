@@ -39,7 +39,7 @@ namespace CronExpressionParser.Core.Fields
 				return parsedInteger.ToList();
 			}
 
-			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace('*', '0');
+			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace('*', MINUTES_MINVALUE.ToString().First());
 			var parsedIntegersSplitBySlash = TryParseIntegers(valuesSplitBySlash).ToList();
 
 			return new List<int>(GetIncrementsOfStartingAt(parsedIntegersSplitBySlash[1], parsedIntegersSplitBySlash[0]));
@@ -51,7 +51,7 @@ namespace CronExpressionParser.Core.Fields
 
 			foreach (var value in values)
 			{
-				if (!int.TryParse(value, out var parsedValue))
+				if (!int.TryParse(value, out var parsedValue) || parsedValue > MINUTES_MAXVALUE)
 				{
 					throw new ArgumentException($"'{value}' is not a valid value for {nameof(MinutesField)}");
 				}
