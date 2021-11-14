@@ -2,10 +2,10 @@
 {
 	public class MinutesField : Field, IField
 	{
-		private const int MIN_VALUE = 0;
-		private const int MAX_VALUE = 59;
+		private const int MinValue = 0;
+		private const int MaxValue = 59;
 
-		public MinutesField() : base(MIN_VALUE, MAX_VALUE)
+		public MinutesField() : base(nameof(MinutesField), MinValue, MaxValue)
 		{
 		}
 	}

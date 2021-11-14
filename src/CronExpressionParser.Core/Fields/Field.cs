@@ -6,20 +6,22 @@ namespace CronExpressionParser.Core.Fields
 {
 	public abstract class Field
 	{
-		private readonly int MIN_VALUE; 
-		private readonly int MAX_VALUE;
+		private readonly string fieldName;
+		private readonly int minValue; 
+		private readonly int maxValue;
 
-		protected Field(int minValue, int maxValue)
+		protected Field(string fieldName, int minValue, int maxValue)
 		{
-			MIN_VALUE = minValue;
-			MAX_VALUE = maxValue;
+			this.fieldName = fieldName;
+			this.minValue = minValue;
+			this.maxValue = maxValue;
 		}
 
 		public List<int> TryParse(string minutesExpression)
 		{
 			if (minutesExpression.Equals("*"))
 			{
-				minutesExpression = $"{MIN_VALUE}-{MAX_VALUE}";
+				minutesExpression = $"{minValue}-{maxValue}";
 			}
 
 			var valuesSplitByComma = minutesExpression.Split(',');
@@ -45,7 +47,7 @@ namespace CronExpressionParser.Core.Fields
 				return parsedInteger.ToList();
 			}
 
-			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace('*', MIN_VALUE.ToString().First());
+			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace('*', minValue.ToString().First());
 			var parsedIntegersSplitBySlash = TryParseIntegers(valuesSplitBySlash).ToList();
 
 			return new List<int>(GetIncrementsOfStartingAt(parsedIntegersSplitBySlash[1], parsedIntegersSplitBySlash[0]));
@@ -57,11 +59,10 @@ namespace CronExpressionParser.Core.Fields
 
 			foreach (var value in values)
 			{
-				if (!int.TryParse(value, out var parsedValue) || parsedValue > MAX_VALUE)
+				if (!int.TryParse(value, out var parsedValue) || parsedValue > maxValue)
 				{
 					var exceptionMessage =
-						string.Format(LogMessageFactory.InvalidValueForExpressionFieldMessageTemplate, value,
-							nameof(MinutesField));
+						string.Format(LogMessageFactory.InvalidValueForExpressionFieldMessageTemplate, value, fieldName);
 					throw new ArgumentException(exceptionMessage);
 				}
 
@@ -75,7 +76,7 @@ namespace CronExpressionParser.Core.Fields
 		{
 			var incrementedValues = new List<int>();
 
-			for (var i = start; i <= MAX_VALUE; i += increment)
+			for (var i = start; i <= maxValue; i += increment)
 			{
 				incrementedValues.Add(i);
 			}
