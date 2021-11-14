@@ -40,9 +40,9 @@ namespace CronExpressionParser.Core
 				fields[Constants.CommandIndex]);
 		}
 
-		public OutputModel Expand()
+		public ViewModel Expand()
 		{
-			return new OutputModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
+			return new ViewModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
 		}
 
 		private static IList<List<int>> ParseNumericFields(IReadOnlyList<string> fields)

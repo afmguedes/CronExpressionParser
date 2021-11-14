@@ -2,7 +2,7 @@
 
 namespace CronExpressionParser.Core
 {
-	public class OutputModel
+	public class ViewModel
 	{
 		public IEnumerable<int> Minutes { get; set; }
 		public IEnumerable<int> Hours { get; set; }
@@ -11,7 +11,7 @@ namespace CronExpressionParser.Core
 		public IEnumerable<int> DaysOfWeek { get; set; }
 		public string Command { get; set; }
 
-		public OutputModel(IEnumerable<int> minutes, IEnumerable<int> hours, IEnumerable<int> daysOfMonth, IEnumerable<int> months, IEnumerable<int> daysOfWeek, string command)
+		public ViewModel(IEnumerable<int> minutes, IEnumerable<int> hours, IEnumerable<int> daysOfMonth, IEnumerable<int> months, IEnumerable<int> daysOfWeek, string command)
 		{
 			Minutes = minutes;
 			Hours = hours;

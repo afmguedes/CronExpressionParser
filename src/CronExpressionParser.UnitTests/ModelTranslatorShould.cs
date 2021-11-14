@@ -24,7 +24,7 @@ namespace CronExpressionParser.UnitTests
 			var months = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 			var daysOfWeek = new[] { 1, 2, 3, 4, 5 };
 			const string command = "/usr/bin/find";
-			var outputModel = new OutputModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
+			var outputModel = new ViewModel(minutes, hours, daysOfMonth, months, daysOfWeek, command);
 			
 			var actualOutputText = ModelTranslator.TranslateToText(outputModel);
 			

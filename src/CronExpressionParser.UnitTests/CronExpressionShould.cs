@@ -19,7 +19,7 @@ namespace CronExpressionParser.UnitTests
 			var expectedMonths = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 			var expectedDaysOfWeek = new[] { 1, 2, 3, 4, 5 };
 			const string expectedCommand = "/usr/bin/find";
-			var expectedOutputModel = new OutputModel(expectedMinutes, expectedHours, expectedDaysOfMonth, expectedMonths, expectedDaysOfWeek, expectedCommand);
+			var expectedOutputModel = new ViewModel(expectedMinutes, expectedHours, expectedDaysOfMonth, expectedMonths, expectedDaysOfWeek, expectedCommand);
 
 			var actualOutputModel = CronExpression.Create(input).Expand();
 

@@ -6,16 +6,16 @@ namespace CronExpressionParser.Core
 {
 	public class ModelTranslator
 	{
-		public static string TranslateToText(OutputModel outputModel)
+		public static string TranslateToText(ViewModel viewModel)
 		{
 			var outputText = new StringBuilder();
 
-			outputText.AppendLine(FormatLine("minute", outputModel.Minutes));
-			outputText.AppendLine(FormatLine("hour", outputModel.Hours));
-			outputText.AppendLine(FormatLine("day of month", outputModel.DaysOfMonth));
-			outputText.AppendLine(FormatLine("month", outputModel.Months));
-			outputText.AppendLine(FormatLine("day of week", outputModel.DaysOfWeek));
-			outputText.AppendLine(FormatLine("command", outputModel.Command));
+			outputText.AppendLine(FormatLine("minute", viewModel.Minutes));
+			outputText.AppendLine(FormatLine("hour", viewModel.Hours));
+			outputText.AppendLine(FormatLine("day of month", viewModel.DaysOfMonth));
+			outputText.AppendLine(FormatLine("month", viewModel.Months));
+			outputText.AppendLine(FormatLine("day of week", viewModel.DaysOfWeek));
+			outputText.AppendLine(FormatLine("command", viewModel.Command));
 
 			return outputText.ToString();
 		}
