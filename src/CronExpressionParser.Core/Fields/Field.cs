@@ -38,7 +38,7 @@ namespace CronExpressionParser.Core.Fields
 			if (valuesSplitByDash.Length > 1)
 			{
 				var parsedIntegersSplitByDash = TryParseIntegers(valuesSplitByDash).ToList();
-				return new List<int>(Enumerable.Range(parsedIntegersSplitByDash[0], parsedIntegersSplitByDash[1]));
+				return parsedIntegersSplitByDash[0].GetIncrementsOf(1, parsedIntegersSplitByDash[1]).ToList();
 			}
 
 			var valuesSplitBySlash = minutesExpression.Split(Constants.IncrementsChar);

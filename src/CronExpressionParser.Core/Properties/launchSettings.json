@@ -1,7 +1,8 @@
 {
   "profiles": {
     "CronExpressionParser.Core": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "*/15 0 1,15 * 1-5 /usr/bin/find"
     }
   }
 }
