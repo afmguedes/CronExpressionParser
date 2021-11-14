@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CronExpressionParser.Core.Config;
 using CronExpressionParser.Core.Exceptions;
 using CronExpressionParser.Core.Fields;
@@ -27,7 +26,7 @@ namespace CronExpressionParser.Core
 
 		public static CronExpression Create(string inputExpression)
 		{
-			var fields = inputExpression.Split(Constants.FieldSeparator);
+			var fields = inputExpression.Split(Constants.SpaceChar);
 
 			if (fields.Length != Constants.NumberOfFields)
 			{

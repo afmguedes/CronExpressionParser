@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using CronExpressionParser.Core.Config;
 
 namespace CronExpressionParser.Core
 {
@@ -21,12 +22,12 @@ namespace CronExpressionParser.Core
 
 		private static string FormatLine(string title, IEnumerable<int> values)
 		{
-			return $"{title.PadRight(14, ' ')}{string.Join(' ', values)}";
+			return $"{title.PadRight(14, Constants.SpaceChar)}{string.Join(Constants.SpaceChar, values)}";
 		}
 
 		private static string FormatLine(string title, string command)
 		{
-			return $"{title.PadRight(14, ' ')}{command}";
+			return $"{title.PadRight(14, Constants.SpaceChar)}{command}";
 		}
 	}
 }

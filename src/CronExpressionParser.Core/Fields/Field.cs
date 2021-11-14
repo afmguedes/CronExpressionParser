@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CronExpressionParser.Core.Config;
+using CronExpressionParser.Core.Utilities;
 
 namespace CronExpressionParser.Core.Fields
 {
@@ -19,19 +21,19 @@ namespace CronExpressionParser.Core.Fields
 
 		public List<int> TryParse(string minutesExpression)
 		{
-			if (minutesExpression.Equals("*"))
+			if (minutesExpression.Equals(Constants.StarChar.ToString()))
 			{
 				minutesExpression = $"{minValue}-{maxValue}";
 			}
 
-			var valuesSplitByComma = minutesExpression.Split(',');
+			var valuesSplitByComma = minutesExpression.Split(Constants.CommaChar);
 
 			if (valuesSplitByComma.Length > 1)
 			{
 				return TryParseIntegers(valuesSplitByComma).ToList();
 			}
 
-			var valuesSplitByDash = minutesExpression.Split('-');
+			var valuesSplitByDash = minutesExpression.Split(Constants.RangeChar);
 
 			if (valuesSplitByDash.Length > 1)
 			{
@@ -39,7 +41,7 @@ namespace CronExpressionParser.Core.Fields
 				return new List<int>(Enumerable.Range(parsedIntegersSplitByDash[0], parsedIntegersSplitByDash[1]));
 			}
 
-			var valuesSplitBySlash = minutesExpression.Split('/');
+			var valuesSplitBySlash = minutesExpression.Split(Constants.IncrementsChar);
 
 			if (valuesSplitBySlash.Length == 1)
 			{
@@ -47,10 +49,10 @@ namespace CronExpressionParser.Core.Fields
 				return parsedInteger.ToList();
 			}
 
-			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace('*', minValue.ToString().First());
+			valuesSplitBySlash[0] = valuesSplitBySlash[0].Replace(Constants.StarChar, minValue.ToString().First());
 			var parsedIntegersSplitBySlash = TryParseIntegers(valuesSplitBySlash).ToList();
 
-			return new List<int>(GetIncrementsOfStartingAt(parsedIntegersSplitBySlash[1], parsedIntegersSplitBySlash[0]));
+			return parsedIntegersSplitBySlash[0].GetIncrementsOf(parsedIntegersSplitBySlash[1], maxValue).ToList();
 		}
 
 		private IEnumerable<int> TryParseIntegers(IEnumerable<string> values)
@@ -70,18 +72,6 @@ namespace CronExpressionParser.Core.Fields
 			}
 
 			return parsedIntegers;
-		}
-
-		private IEnumerable<int> GetIncrementsOfStartingAt(int increment, int start)
-		{
-			var incrementedValues = new List<int>();
-
-			for (var i = start; i <= maxValue; i += increment)
-			{
-				incrementedValues.Add(i);
-			}
-
-			return incrementedValues;
 		}
 	}
 }
