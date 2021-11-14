@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CronExpressionParser.Core.Fields
 {
-	public abstract class Field
+	public abstract class Field : IField
 	{
 		private readonly string fieldName;
 		private readonly int minValue; 

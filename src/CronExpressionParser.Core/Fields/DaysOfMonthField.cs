@@ -1,6 +1,6 @@
 ﻿namespace CronExpressionParser.Core.Fields
 {
-	public class DaysOfMonthField : Field, IField
+	public class DaysOfMonthField : Field
 	{
 		private const int MinValue = 1;
 		private const int MaxValue = 31;

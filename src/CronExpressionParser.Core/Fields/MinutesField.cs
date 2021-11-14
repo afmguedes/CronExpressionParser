@@ -1,6 +1,6 @@
 ﻿namespace CronExpressionParser.Core.Fields
 {
-	public class MinutesField : Field, IField
+	public class MinutesField : Field
 	{
 		private const int MinValue = 0;
 		private const int MaxValue = 59;
